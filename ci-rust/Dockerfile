@@ -16,7 +16,7 @@ RUN apt update && apt upgrade && \
 
 # Install Rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain none -y
-ENV PATH="${HOME}/.cargo/bin:${PATH}"
+ENV PATH="$HOME/.cargo/bin:${PATH}"
 RUN rustup toolchain install nightly --allow-downgrade --profile minimal --component clippy rustfmt
 
 # Install Just (https://github.com/casey/just)
