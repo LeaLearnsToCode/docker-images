@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM circleci/aws-ecr:7.2.0
 
 # Install pacakges
 ENV DEBIAN_FRONTEND=noninteractive
