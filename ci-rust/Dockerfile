@@ -1,4 +1,4 @@
-FROM ubuntu/ubuntu:20.04
+FROM ubuntu:latest
 
 # Install pacakges
 ENV DEBIAN_FRONTEND=noninteractive
