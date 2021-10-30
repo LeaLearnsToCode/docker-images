@@ -13,6 +13,11 @@ orbs:
 
 jobs:
 
+  no-jobs:
+    steps:
+      - run: |
+          echo "Nothing to do!"
+
 
   ci-rust-build:
     executor: aws-ecr/default
@@ -55,9 +60,8 @@ workflows:
   nothing:
     when:
       or: [not: << pipeline.parameters.run-ci-rust >>, not: << pipeline.parameters.circleci-changed >>]
-    steps:
-      - run: |
-        echo "Nothing to do!"
+    jobs:
+      - no-jobs
 
   ci-rust:
     when: 
