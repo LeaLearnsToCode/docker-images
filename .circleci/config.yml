@@ -9,9 +9,6 @@ workflows:
     jobs:
       - ci-rust:
           context: [aws]
-  test:
-    jobs:
-      - ci-rust-test
 
 jobs:
   ci-rust:
