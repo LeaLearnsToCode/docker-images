@@ -14,5 +14,5 @@ workflows:
           mapping: |
             ci-rust/.* run-ci-rust true
           # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
-          base-revision: main          
+          base-revision: << parameters.git.branch >>
           config-path: .circleci/continue_config.yml
