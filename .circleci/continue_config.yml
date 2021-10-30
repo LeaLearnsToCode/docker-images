@@ -52,6 +52,12 @@ jobs:
 workflows:
   version: 2
 
+  nothing:
+    when:
+      or: [not: << pipeline.parameters.run-ci-rust >>, not: << pipeline.parameters.circleci-changed >>]
+    steps:
+      - run: |
+        echo "Nothing to do!"
 
   ci-rust:
     when: 
