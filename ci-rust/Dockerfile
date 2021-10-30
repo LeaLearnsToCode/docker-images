@@ -1,6 +1,6 @@
-FROM cimg/base:stable-20.04
+FROM ubuntu/ubuntu:20.04
 
-# Install pacakges
+#Install pacakges
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt upgrade && \
     apt install -y sudo curl build-essential lld && \
