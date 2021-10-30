@@ -8,10 +8,10 @@ orbs:
 workflows:
   version: 2
 
-  always-run:
+  detect-changed-images:
     jobs:
       - path-filtering/filter:
-          name: check-updated-files
+          name: "Detecting changed images..."
           mapping: |
             ci-rust/.* run-ci-rust true
           # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>

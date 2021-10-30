@@ -47,14 +47,16 @@ workflows:
 
   ci-rust:
     when: << pipeline.parameters.run-ci-rust >>
-    
     jobs:
       - ci-rust-build:
+          name: "Building docker image..."
           context: [aws] 
       - ci-rust-test:
+          name: "Testing docker image..."
           context:  [aws] 
           requires: [ci-rust-build]
       - ci-rust-deploy:
+          name: "Deplying!"
           context:  [aws] 
           requires: [ci-rust-test]
           filters:
