@@ -4,18 +4,17 @@ orbs:
   aws-ecr: circleci/aws-ecr@7.2.0
 
 jobs:
-  ci-rust:
+  ci-rust-build:
     executor: aws-ecr/default
     steps:
       - aws-ecr/build-and-push-image:
           path: ci-rust
           repo: ci-rust
           create-repo: true
-  test:
+  ci-rust-test:
     docker:
       - image: 014428637873.dkr.ecr.us-east-1.amazonaws.com/ci-rust:latest
     steps:
-      - setup_remote_docker
       - run: |
           cargo --version
           cargo new hello
@@ -25,9 +24,11 @@ jobs:
 
 workflows:
   version: 2
-  build:
+  build-test-deploy:
     jobs:
-      - ci-rust:
+      - ci-rust-build:
           context: [aws]
-      - test:
+      - ci-rust-test:
           context: [aws]
+          requires:
+            - ci-rust-build
