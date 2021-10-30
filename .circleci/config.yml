@@ -21,7 +21,7 @@ jobs:
           path: ci-rust
           repo: ci-rust
           create-repo: true
-  test:
+  ci-rust-test:
     executor: 014428637873.dkr.ecr.us-east-1.amazonaws.com/ci-rust:latest
     steps:
       - checkout
