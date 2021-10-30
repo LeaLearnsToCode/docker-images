@@ -3,7 +3,7 @@ FROM ubuntu:latest
 # Install pacakges
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt upgrade && \
-    apt install -y curl build-essential lld && \
+    apt install -y sudo curl build-essential lld && \
     rm -rf /var/lib/apt/lists/*
 
 # Setup circleci user
