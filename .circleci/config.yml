@@ -13,6 +13,7 @@ workflows:
       - path-filtering/filter:
           mapping: |
             ci-rust/.* run-ci-rust true
+          # .circleci/.* circleci-changed true
           # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
-          base-revision: main          
+          base-revision: main
           config-path: .circleci/continue_config.yml

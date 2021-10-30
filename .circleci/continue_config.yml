@@ -1,6 +1,9 @@
 version: 2.1
 
 parameters:
+  circleci-changed:
+    type: boolean
+    default: false
   run-ci-rust:
     type: boolean
     default: false
@@ -32,6 +35,7 @@ jobs:
           cargo new hello
           cd hello
           cargo run
+          just --version
 
 
   ci-rust-deploy:
@@ -50,7 +54,8 @@ workflows:
 
 
   ci-rust:
-    when: << pipeline.parameters.run-ci-rust >>
+    when: 
+      or: [<< pipeline.parameters.run-ci-rust >>, << pipeline.parameters.circleci-changed >>]
     jobs:
       - ci-rust-build:
           context: [aws] 
