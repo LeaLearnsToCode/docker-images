@@ -8,13 +8,12 @@ orbs:
 workflows:
   version: 2
 
-  # the always-run workflow is always triggered, regardless of the pipeline parameters.
   always-run:
     jobs:
       - path-filtering/filter:
           name: check-updated-files
-          # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
           mapping: |
             ci-rust/.* run-ci-rust true
+          # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
           base-revision: main          
           config-path: .circleci/continue_config.yml

@@ -9,6 +9,8 @@ orbs:
   aws-ecr: circleci/aws-ecr@7.2.0
 
 jobs:
+
+
   ci-rust-build:
     executor: aws-ecr/default
     steps:
@@ -16,17 +18,19 @@ jobs:
           path: ci-rust
           repo: ci-rust
           create-repo: true
-          tag: << pipeline.git.revision >>
+          tag: build-<< pipeline.git.revision >>
+
 
   ci-rust-test:
     docker:
-      - image: 014428637873.dkr.ecr.us-east-1.amazonaws.com/ci-rust:<< pipeline.git.revision >>
+      - image: 014428637873.dkr.ecr.us-east-1.amazonaws.com/ci-rust:build-<< pipeline.git.revision >>
     steps:
       - run: |
           cargo --version
           cargo new hello
           cd hello
           cargo run
+
 
   ci-rust-deploy:
     executor: aws-ecr/default
@@ -36,8 +40,10 @@ jobs:
           repo: ci-rust
           tag: latest
 
+
 workflows:
   version: 2
+
 
   ci-rust:
     when: << pipeline.parameters.run-ci-rust >>
