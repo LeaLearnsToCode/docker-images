@@ -1,0 +1,56 @@
+version: 2.1
+
+parameters:
+  run-ci-rust:
+    type: boolean
+    default: false
+
+orbs:
+  aws-ecr: circleci/aws-ecr@7.2.0
+
+jobs:
+  ci-rust-build:
+    executor: aws-ecr/default
+    steps:
+      - aws-ecr/build-and-push-image:
+          path: ci-rust
+          repo: ci-rust
+          create-repo: true
+          tag: << pipeline.git.revision >>
+
+  ci-rust-test:
+    docker:
+      - image: 014428637873.dkr.ecr.us-east-1.amazonaws.com/ci-rust:<< pipeline.git.revision >>
+    steps:
+      - run: |
+          cargo --version
+          cargo new hello
+          cd hello
+          cargo run
+
+  ci-rust-deploy:
+    executor: aws-ecr/default
+    steps:
+      - aws-ecr/build-and-push-image:
+          path: ci-rust
+          repo: ci-rust
+          tag: latest
+
+workflows:
+  version: 2
+
+  ci-rust:
+    when: << pipeline.parameters.run-ci-rust >>
+    
+    jobs:
+      - ci-rust-build:
+          context: [aws] 
+      - ci-rust-test:
+          context:  [aws] 
+          requires: [ci-rust-build]
+      - ci-rust-deploy:
+          context:  [aws] 
+          requires: [ci-rust-test]
+          filters:
+             branches:
+               only: main
