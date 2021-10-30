@@ -21,13 +21,15 @@ jobs:
           path: ci-rust
           repo: ci-rust
           create-repo: true
-  ci-rust-test:
-    docker:
-      - image: 014428637873.dkr.ecr.us-east-1.amazonaws.com/ci-rust:latest
-    steps:
-      - checkout
-      - run: |
-          cargo --version
-          cargo new hello
-          cd hello
-          cargo run
+      - test:
+          requires:
+            - aws-ecr/build-and-push-image
+          docker:
+            - image: 014428637873.dkr.ecr.us-east-1.amazonaws.com/ci-rust:latest
+          steps:
+            - checkout
+            - run: |
+                cargo --version
+                cargo new hello
+                cd hello
+                cargo run
