@@ -15,6 +15,8 @@ jobs:
     executor: aws-ecr/default
     steps:
       - aws-ecr/build-and-push-image:
+          setup-remote-docker: true
+          remote-docker-layer-caching: true
           path: ci-rust
           repo: ci-rust
           create-repo: true
@@ -36,6 +38,8 @@ jobs:
     executor: aws-ecr/default
     steps:
       - aws-ecr/build-and-push-image:
+          setup-remote-docker: true
+          remote-docker-layer-caching: true
           path: ci-rust
           repo: ci-rust
           tag: latest
