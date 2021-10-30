@@ -12,7 +12,6 @@ jobs:
 
 
   ci-rust-build:
-    name: "Building docker image..."
     executor: aws-ecr/default
     steps:
       - aws-ecr/build-and-push-image:
@@ -23,7 +22,6 @@ jobs:
 
 
   ci-rust-test:
-    name: "Testing docker image..."
     docker:
       - image: 014428637873.dkr.ecr.us-east-1.amazonaws.com/ci-rust:build-<< pipeline.git.revision >>
     steps:
@@ -35,7 +33,6 @@ jobs:
 
 
   ci-rust-deploy:
-    name: "Deplying!"
     executor: aws-ecr/default
     steps:
       - aws-ecr/build-and-push-image:
