@@ -1,4 +1,4 @@
-FROM cimg/base:7.2.0
+FROM cimg/base:stable-20.04
 
 # Install pacakges
 ENV DEBIAN_FRONTEND=noninteractive
