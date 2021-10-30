@@ -16,6 +16,5 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --defau
 ENV PATH="/root/.cargo/bin:${PATH}"
 RUN rustup toolchain install nightly --allow-downgrade --profile minimal --component clippy rustfmt
 
-# Install Rust tools
-RUN cargo install just
-
+# Install Just (https://github.com/casey/just)
+RUN curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /root/.cargo/bin
