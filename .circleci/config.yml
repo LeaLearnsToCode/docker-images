@@ -17,4 +17,4 @@ workflows:
           mapping: |
             ci-rust/.* run-ci-rust true
           base-revision: main          
-          config-path: .circleci/config_continue.yml
+          config-path: .circleci/continue_config.yml
