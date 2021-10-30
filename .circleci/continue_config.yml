@@ -12,6 +12,7 @@ jobs:
 
 
   ci-rust-build:
+    name: "Building docker image..."
     executor: aws-ecr/default
     steps:
       - aws-ecr/build-and-push-image:
@@ -22,6 +23,7 @@ jobs:
 
 
   ci-rust-test:
+    name: "Testing docker image..."
     docker:
       - image: 014428637873.dkr.ecr.us-east-1.amazonaws.com/ci-rust:build-<< pipeline.git.revision >>
     steps:
@@ -33,6 +35,7 @@ jobs:
 
 
   ci-rust-deploy:
+    name: "Deplying!"
     executor: aws-ecr/default
     steps:
       - aws-ecr/build-and-push-image:
@@ -49,14 +52,11 @@ workflows:
     when: << pipeline.parameters.run-ci-rust >>
     jobs:
       - ci-rust-build:
-          name: "Building docker image..."
           context: [aws] 
       - ci-rust-test:
-          name: "Testing docker image..."
           context:  [aws] 
           requires: [ci-rust-build]
       - ci-rust-deploy:
-          name: "Deplying!"
           context:  [aws] 
           requires: [ci-rust-test]
           filters:
