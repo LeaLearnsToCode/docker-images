@@ -18,3 +18,4 @@ RUN rustup toolchain install nightly --allow-downgrade --profile minimal --compo
 
 # Install Just (https://github.com/casey/just)
 RUN curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /root/.cargo/bin
+
