@@ -16,5 +16,5 @@ jobs:
     steps:
       - aws-ecr/build-and-push-image:
           path: ci-rust
-          repo: lealearnstocode
+          repo: ci-rust
           create-repo: true
