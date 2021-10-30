@@ -7,12 +7,12 @@ RUN apt update && apt upgrade && \
     rm -rf /var/lib/apt/lists/*
 
 # Setup circleci user
-RUN groupadd --gid 3434 circleci \
-  && useradd --uid 3434 --gid circleci --shell /bin/bash --create-home circleci \
-  && echo 'circleci ALL=NOPASSWD: ALL' >> /etc/sudoers.d/50-circleci \
-  && echo 'Defaults    env_keep += "DEBIAN_FRONTEND"' >> /etc/sudoers.d/env_keep
+# RUN groupadd --gid 3434 circleci \
+#   && useradd --uid 3434 --gid circleci --shell /bin/bash --create-home circleci \
+#   && echo 'circleci ALL=NOPASSWD: ALL' >> /etc/sudoers.d/50-circleci \
+#   && echo 'Defaults    env_keep += "DEBIAN_FRONTEND"' >> /etc/sudoers.d/env_keep
 
-USER circleci
+# USER circleci
 
 # Install Rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain none -y
