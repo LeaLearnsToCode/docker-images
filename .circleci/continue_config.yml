@@ -43,6 +43,7 @@ jobs:
           cd hello
           cargo run
           just --version
+          sccache --version
 
 
   ci-rust-deploy:

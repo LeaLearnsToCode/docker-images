@@ -11,3 +11,5 @@ Repository: `014428637873.dkr.ecr.us-east-1.amazonaws.com`
 |     Container     | Description |
 |:----------------- |:----------- |
 | `ci-rust:latest`  | Provides Rust and the Just task runner.|
+
+
