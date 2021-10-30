@@ -1,6 +1,6 @@
 version: 2.1
 
-setup: true
+setup: << pipeline.in_setup >>
 
 parameters:
   run-ci-rust:
