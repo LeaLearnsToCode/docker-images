@@ -55,7 +55,7 @@ workflows:
 
   ci-rust:
     when: 
-      or: [<< pipeline.parameters.run-ci-rust >>, << pipeline.parameters.circleci-changed >>}
+      or: [<< pipeline.parameters.run-ci-rust >>, << pipeline.parameters.circleci-changed >>]
     jobs:
       - ci-rust-build:
           context: [aws] 
