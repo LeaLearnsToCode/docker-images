@@ -59,9 +59,9 @@ jobs:
 workflows:
   version: 2
 
-  nothing:
+  no-jobs:
     when:
-      or: [not: << pipeline.parameters.run-ci-rust >>, not: << pipeline.parameters.circleci-changed >>]
+      and: [not: << pipeline.parameters.run-ci-rust >>, not: << pipeline.parameters.circleci-changed >>]
     jobs:
       - no-jobs
 
