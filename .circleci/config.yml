@@ -7,11 +7,11 @@ workflows:
   version: 2
   build:
     jobs:
-      - rust:
+      - ci-rust:
           context: [aws]
 
 jobs:
-  rust:
+  ci-rust:
     executor: aws-ecr/default
     steps:
       - aws-ecr/build-and-push-image:
