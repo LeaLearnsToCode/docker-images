@@ -1,6 +1,9 @@
 version: 2.1
 
 parameters:
+  circleci-changed:
+    type: boolean
+    default: false
   run-ci-rust:
     type: boolean
     default: false
@@ -15,8 +18,8 @@ jobs:
     executor: aws-ecr/default
     steps:
       - aws-ecr/build-and-push-image:
-          setup-remote-docker: true
-          remote-docker-layer-caching: true
+          #setup-remote-docker: true
+          #remote-docker-layer-caching: true
           path: ci-rust
           repo: ci-rust
           create-repo: true
@@ -32,14 +35,15 @@ jobs:
           cargo new hello
           cd hello
           cargo run
+          just --version
 
 
   ci-rust-deploy:
     executor: aws-ecr/default
     steps:
       - aws-ecr/build-and-push-image:
-          setup-remote-docker: true
-          remote-docker-layer-caching: true
+          #setup-remote-docker: true
+          #remote-docker-layer-caching: true
           path: ci-rust
           repo: ci-rust
           tag: latest
@@ -50,7 +54,8 @@ workflows:
 
 
   ci-rust:
-    when: << pipeline.parameters.run-ci-rust >>
+    when: 
+      or: [<< pipeline.parameters.run-ci-rust >>, << pipeline.parameters.circleci-changed >>]
     jobs:
       - ci-rust-build:
           context: [aws] 
